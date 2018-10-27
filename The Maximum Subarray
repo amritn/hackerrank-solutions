@@ -1,0 +1,63 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scan=new Scanner(System.in);
+        int t=scan.nextInt();
+        for(int i=0;i<t;i++){
+            int n=scan.nextInt();
+            int[] ar=new int[n];
+            for(int j=0;j<n;j++){
+                ar[j]=scan.nextInt();
+            }
+            maxSum(ar,n);
+        }
+    }
+    public static void maxSum(int[] ar,int n){
+        int sum1,sum2,i;
+        sum1=sum2=i=0;
+        int allNeg,allPos;
+        allNeg=allPos=1;
+        int nonContSum=0;
+        //check if all elements are negative
+        for(i=0;i<n;i++){
+            if(ar[i]>=0)
+                allNeg=0;
+        }
+        //check if all elements are positive
+        for(i=0;i<n;i++){
+           if(ar[i]<0)
+               allPos=0;
+        }
+        if(allNeg!=1 && allPos!=1){
+        for(i=0;i<n;i++){
+            if(ar[i]>=0){
+                nonContSum+=ar[i];
+            }
+            sum1+=ar[i];
+            if(sum1<0)
+                sum1=0;
+            else if(sum1>sum2)
+                sum2=sum1;
+        }
+        }
+        else if(allNeg==1){
+            sum2=ar[0];
+            for(i=0;i<n;i++){
+                if(sum2<ar[i])
+                    sum2=ar[i];
+            }
+            nonContSum=sum2;
+        }
+        else if(allPos==1){
+            for(i=0;i<n;i++){
+                sum2+=ar[i];
+            }
+            nonContSum=sum2;
+        }
+        System.out.println(sum2+" "+nonContSum);
+    }
+}
