@@ -1,0 +1,35 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scan=new Scanner(System.in);
+        int n=scan.nextInt();
+        String str=scan.next();
+        minSteps(str,n);
+       
+    }
+    public static String charArToString(char[] ar,int n){
+        StringBuffer strNew=new StringBuffer();
+        for(int i=0;i<n;i++){
+            strNew.append(ar[i]);
+        }
+        return strNew.toString();
+    }
+    public static void minSteps(String str,int n){
+       
+        int c=0;
+        for(int i=0;i<n-2;i++){
+            char[] strAr=str.toCharArray();
+            String sub=str.substring(i,i+3);
+            if(sub.equals("010")){
+                strAr[i+2]='1';
+                c++;
+                str=charArToString(strAr,n);
+            }
+        }
+        System.out.println(c);
+    }
+}
